@@ -8,6 +8,7 @@
     . theme=null (blue|azure|indigo|purple|pink|red|orange|yellow|lime|green|teal|cyan|gray-%|facebook|twitter)
     . theme-light=false (n/a for gray-% and brands)
     . status=null (same as theme)
+    . brand=null (display brand logo in bottom right, needs the path to image)
 
 *}
 {define "zf-avatar", array $attributes = []}
@@ -15,6 +16,7 @@
     {var string $size = $attributes['size'] ?? "md"}
     {var bool $themeLight = $attributes['theme-light'] ?? false}
     {var ?string $status = $attributes['status'] ?? null}
+    {var ?string $brand = $attributes['brand'] ?? null}
     {var ?string $theme = $attributes['theme'] ?? null}
     {var ?string $placeholder = $attributes['placeholder'] ?? null}
     {var ?string $image = $attributes['image'] ?? null}
@@ -54,6 +56,9 @@
         {/if}
         {if $status}
             <span class="badge bg-{$status}"></span>
+        {/if}
+        {if $brand}
+            <span class="avatar-brand" style="background-image: url('{$brand|noescape}'); background-size: 1rem; background-repeat: no-repeat; background-position: center center;"></span>
         {/if}
     </span>
 {/define}
